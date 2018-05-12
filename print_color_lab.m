@@ -1,7 +1,7 @@
-function [] = print_color_lab(l,a,b)
+function [] = print_color_lab(lab)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-    rgb=lab2rgb([l,a,b]);
-    print_color_rgb(rgb(1),rgb(2),rgb(2));
+    rgb=lab2rgb(lab);
+    print_color_rgb(rgb);
 end
 

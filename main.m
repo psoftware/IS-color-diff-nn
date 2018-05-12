@@ -6,9 +6,9 @@ specnoised = zeros(421,1269*5); % for performance
 for i_spec = 1:1269
     for sampl = 1:5
         specmaster(:, i_spec*sampl) = spectra(:, i_spec);
-        specnoised(1:140, i_spec*sampl) = spectra(1:140, i_spec) + randn(1,1)/100;
-        specnoised(141:280, i_spec*sampl) = spectra(141:280, i_spec) + randn(1,1)/100;
-        specnoised(281:421, i_spec*sampl) = spectra(281:421, i_spec) + randn(1,1)/100;
+        specnoised(1:140, i_spec*sampl) = spectra(1:140, i_spec) + randn(1,1)/75;
+        specnoised(141:280, i_spec*sampl) = spectra(141:280, i_spec) + randn(1,1)/75;
+        specnoised(281:421, i_spec*sampl) = spectra(281:421, i_spec) + randn(1,1)/75;
     end
 end
 

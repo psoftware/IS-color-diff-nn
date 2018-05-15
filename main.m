@@ -3,7 +3,7 @@ load("dataset\IS_dataset.mat")
 rng(7);
 
 % build two matrix: one without noise and another with noise
-copies = 5;
+copies = 10;
 specmaster = zeros(421,1269*copies); % for performance
 specnoised = zeros(421,1269*copies); % for performance
 for i_spec = 1:1269

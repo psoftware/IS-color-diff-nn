@@ -1,10 +1,13 @@
 load("dataset\IS_dataset.mat")
 
+rng(7);
+
 % build two matrix: one without noise and another with noise
-specmaster = zeros(421,1269*5); % for performance
-specnoised = zeros(421,1269*5); % for performance
+copies = 5;
+specmaster = zeros(421,1269*copies); % for performance
+specnoised = zeros(421,1269*copies); % for performance
 for i_spec = 1:1269
-    for sampl = 1:5
+    for sampl = 1:copies
         specmaster(:, i_spec*sampl) = spectra(:, i_spec);
         specnoised(1:140, i_spec*sampl) = spectra(1:140, i_spec) + randn(1,1)/75;
         specnoised(141:280, i_spec*sampl) = spectra(141:280, i_spec) + randn(1,1)/75;
@@ -13,12 +16,24 @@ for i_spec = 1:1269
 end
 
 spec_coeff = 100;
-labmaster(:,1:2500) = roo2lab(specmaster(:,1:2500)'.*spec_coeff, 'D65/2', 380:1:800)';
-labmaster(:,2501:5000) = roo2lab(specmaster(:,2501:5000)'.*spec_coeff, 'D65/2', 380:1:800)';
-labmaster(:,5000:6345) = roo2lab(specmaster(:,5000:6345)'.*spec_coeff, 'D65/2', 380:1:800)';
-labnoise(:,1:2500) = roo2lab(specnoised(:,1:2500)'.*spec_coeff, 'D65/2', 380:1:800)';
-labnoise(:,2501:5000) = roo2lab(specnoised(:,2501:5000)'.*spec_coeff, 'D65/2', 380:1:800)';
-labnoise(:,5000:6345) = roo2lab(specnoised(:,5000:6345)'.*spec_coeff, 'D65/2', 380:1:800)';
+labmaster = zeros(3,1269*copies); % for performance
+labnoise = zeros(3,1269*copies); % for performance
+
+chunksize = 2500;
+chunkstart = 1;
+chunkend = 1;
+chunkstop = false;
+while not(chunkstop)
+    if(chunkstart + chunksize > 1269*copies)
+        chunkend = chunkstart+ 1269*copies - chunkstart;
+        chunkstop = true;
+    else
+        chunkend = chunkstart + chunksize;
+    end
+    labmaster(:,chunkstart:chunkend) = roo2lab(specmaster(:,chunkstart:chunkend)'.*spec_coeff, 'D65/2', 380:1:800)';
+    labnoise(:,chunkstart:chunkend) = roo2lab(specnoised(:,chunkstart:chunkend)'.*spec_coeff, 'D65/2', 380:1:800)';
+    chunkstart = chunkstart + chunksize;
+end
 
 distance = sqrt( power(labnoise(1,:)-labmaster(1,:),2) + power(labnoise(2,:)-labmaster(2,:),2) + power(labnoise(3,:)-labmaster(3,:),2) )
 

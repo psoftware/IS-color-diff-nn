@@ -1,5 +1,5 @@
 function perf = fs_net_final(x,t)
-	hiddenLayerSize = 3;
+	hiddenLayerSize = 10;
     net = fitnet(hiddenLayerSize);
     xx = x.';
     tt = t.';

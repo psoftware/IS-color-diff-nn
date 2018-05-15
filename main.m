@@ -90,4 +90,8 @@ features = features';
 
 opt = statset('display', 'iter');
 
-[fs, history] = sequentialfs(@fs_net, features, distance', 'cv', 'none', 'opt', opt, 'nfeatures', 10);
+[fs, history] = sequentialfs(@fs_net, features, distance', 'cv', 'none', 'opt', opt, 'nfeatures', 12);
+
+% compute best network
+bestfeatures = features(:,fs);
+fs_net_final(bestfeatures, distance');

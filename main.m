@@ -35,7 +35,8 @@ while not(chunkstop)
     chunkstart = chunkstart + chunksize;
 end
 
-distance = sqrt( power(labnoise(1,:)-labmaster(1,:),2) + power(labnoise(2,:)-labmaster(2,:),2) + power(labnoise(3,:)-labmaster(3,:),2) )
+% distance = sqrt( power(labnoise(1,:)-labmaster(1,:),2) + power(labnoise(2,:)-labmaster(2,:),2) + power(labnoise(3,:)-labmaster(3,:),2) )
+distance = de(labnoise', labmaster')'
 
 % figure('Position', [100, 100, 1000, 400]);
 % subplot(1,2,1)

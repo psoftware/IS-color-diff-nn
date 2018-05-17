@@ -1,9 +1,10 @@
 load("dataset\IS_dataset.mat")
 
 copies = 10;
+seed = 27;
 
 % generate couples (master, noisedmaster)
-[specmaster, specnoised] = gen_copies(spectra, copies);
+[specmaster, specnoised] = gen_copies(spectra, copies, seed);
 
 % compute lab coordinates for both sets
 [labmaster, labnoise] = compute_lab(specmaster, specnoised, copies);

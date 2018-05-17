@@ -1,4 +1,5 @@
-function [specmasterP, specnoisedP] = gen_copies(spectra, copies)
+function [specmasterP, specnoisedP] = gen_copies(spectra, copies, seed)
+    oldseed = rng(seed);
     % build two matrix: one without noise and another with noise
     specmasterP = zeros(421,1269*copies); % for performance
     specnoisedP = zeros(421,1269*copies); % for performance
@@ -10,4 +11,6 @@ function [specmasterP, specnoisedP] = gen_copies(spectra, copies)
             specnoisedP(281:421, (i_spec-1)*copies + sampl) = spectra(281:421, i_spec) + (rand(1,1)*2 - 1)/100;
         end
     end
+
+    rng(oldseed);
 end

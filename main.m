@@ -150,13 +150,14 @@ features = features';
 % t = randn(1261,1);
 
 opt = statset('display', 'iter');
-%[fs, history] = sequentialfs(@fs_net, features, distance', 'cv', 'none', 'opt', opt, 'nfeatures', 10);
+%[fs, history] = sequentialfs(@fs_net, features, distance', 'cv', 'none', 'opt', opt, 'nfeatures', 1);
 
 % compute best network
 %bestfeatures = features(:,fs);
 
-% 10 features selected with 10 neurons in the hidden layer
-bestfeatures = [false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false];
+%selected best 10 features
+bestfeatures = features(:, [false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false]);
+
 
 mse = fs_net_final(bestfeatures, distance');
 disp(['Mean Squared Error = ', num2str(mse)]);

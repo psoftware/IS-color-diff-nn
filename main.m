@@ -119,28 +119,28 @@ for c = 1:1269*copies
     pmf2_noised(:,c) = polyfit((141:1:280)',specnoised(141:280,c),2);
 end
 %prima parte spettro
-features(i,:) = pmf0_master(1,:); i=i+1; %primo coefficiente della parabola
-features(i,:) = pmf0_master(2,:); i=i+1; %secondo coefficiente della parabola
-features(i,:) = pmf0_master(3,:); i=i+1; %terzo coefficiente della parabola
-features(i,:) = pmf0_noised(1,:); i=i+1; %primo coefficiente della parabola
-features(i,:) = pmf0_noised(2,:); i=i+1; %secondo coefficiente della parabola
-features(i,:) = pmf0_noised(3,:); i=i+1; %terzo coefficiente della parabola
+features(i,:) = normalize(pmf0_master(1,:)); i=i+1; %primo coefficiente della parabola
+features(i,:) = normalize(pmf0_master(2,:)); i=i+1; %secondo coefficiente della parabola
+features(i,:) = normalize(pmf0_master(3,:)); i=i+1; %terzo coefficiente della parabola
+features(i,:) = normalize(pmf0_noised(1,:)); i=i+1; %primo coefficiente della parabola
+features(i,:) = normalize(pmf0_noised(2,:)); i=i+1; %secondo coefficiente della parabola
+features(i,:) = normalize(pmf0_noised(3,:)); i=i+1; %terzo coefficiente della parabola
 
 %seconda parte spettro
-features(i,:) = pmf1_master(1,:); i=i+1; %primo coefficiente della parabola
-features(i,:) = pmf1_master(2,:); i=i+1; %secondo coefficiente della parabola
-features(i,:) = pmf1_master(3,:); i=i+1; %terzo coefficiente della parabola
-features(i,:) = pmf1_noised(1,:); i=i+1; %primo coefficiente della parabola
-features(i,:) = pmf1_noised(2,:); i=i+1; %secondo coefficiente della parabola
-features(i,:) = pmf1_noised(3,:); i=i+1; %terzo coefficiente della parabola
+features(i,:) = normalize(pmf1_master(1,:)); i=i+1; %primo coefficiente della parabola
+features(i,:) = normalize(pmf1_master(2,:)); i=i+1; %secondo coefficiente della parabola
+features(i,:) = normalize(pmf1_master(3,:)); i=i+1; %terzo coefficiente della parabola
+features(i,:) = normalize(pmf1_noised(1,:)); i=i+1; %primo coefficiente della parabola
+features(i,:) = normalize(pmf1_noised(2,:)); i=i+1; %secondo coefficiente della parabola
+features(i,:) = normalize(pmf1_noised(3,:)); i=i+1; %terzo coefficiente della parabola
 
 %terza parte spettro
-features(i,:) = pmf2_master(1,:); i=i+1; %primo coefficiente della parabola
-features(i,:) = pmf2_master(2,:); i=i+1; %secondo coefficiente della parabola
-features(i,:) = pmf2_master(3,:); i=i+1; %terzo coefficiente della parabola
-features(i,:) = pmf2_noised(1,:); i=i+1; %primo coefficiente della parabola
-features(i,:) = pmf2_noised(2,:); i=i+1; %secondo coefficiente della parabola
-features(i,:) = pmf2_noised(3,:); i=i+1; %terzo coefficiente della parabola
+features(i,:) = normalize(pmf2_master(1,:)); i=i+1; %primo coefficiente della parabola
+features(i,:) = normalize(pmf2_master(2,:)); i=i+1; %secondo coefficiente della parabola
+features(i,:) = normalize(pmf2_master(3,:)); i=i+1; %terzo coefficiente della parabola
+features(i,:) = normalize(pmf2_noised(1,:)); i=i+1; %primo coefficiente della parabola
+features(i,:) = normalize(pmf2_noised(2,:)); i=i+1; %secondo coefficiente della parabola
+features(i,:) = normalize(pmf2_noised(3,:)); i=i+1; %terzo coefficiente della parabola
 
 features = features';
 

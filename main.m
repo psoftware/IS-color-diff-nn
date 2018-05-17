@@ -1,3 +1,5 @@
+clear();
+
 load("dataset\IS_dataset.mat")
 
 copies = 10;
@@ -38,5 +40,3 @@ bestfeatures = features(:, [true false false false true false false true false f
 
 mse = fs_net_final(bestfeatures, distance');
 disp(['Mean Squared Error = ', num2str(mse)]);
-
-clear();

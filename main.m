@@ -35,8 +35,10 @@ opt = statset('display', 'iter');
 % compute best network
 %bestfeatures = features(:,fs);
 
-%selected best 10 features
-bestfeatures = features(:, [true false false false true false false true false false true false false false false true false false false false false false true false false false false false false false true false true false false false false false true true false false false false false false false false]);
+%selected best 10 features - parabola regression
+%bestfeatures = features(:, [true false false false true false false true false false true false false false false true false false false false false false true false false false false false false false true false true false false false false false true true false false false false false false false false]);
+bestfeatures = features(:, [true true false false false false false true false false false false false false true true false false false false false false true false true false false false false false true false true false false true false false false false false false]);
+
 
 mse = fs_net_final(bestfeatures, distance');
 disp(['Mean Squared Error = ', num2str(mse)]);

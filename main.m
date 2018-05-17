@@ -156,7 +156,7 @@ opt = statset('display', 'iter');
 %bestfeatures = features(:,fs);
 
 % 10 features selected with 10 neurons in the hidden layer
-[false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false]
+bestfeatures = [false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false];
 
 mse = fs_net_final(bestfeatures, distance');
 disp(['Mean Squared Error = ', num2str(mse)]);

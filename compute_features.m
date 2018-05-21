@@ -11,6 +11,12 @@ function features = compute_features(specmasterP, specnoisedP, copies)
     features(i,:) = normalize(min(specmasterP(1:140,:))); i=i+1;
     features(i,:) = normalize(min(specmasterP(141:280,:))); i=i+1;
     features(i,:) = normalize(min(specmasterP(281:421,:))); i=i+1;
+    features(i,:) = normalize(sum(specmasterP(1:140,:))); i=i+1;
+    features(i,:) = normalize(sum(specmasterP(141:280,:))); i=i+1;
+    features(i,:) = normalize(sum(specmasterP(281:421,:))); i=i+1;
+    features(i,:) = normalize(skewness(specmasterP(1:140,:))); i=i+1;
+    features(i,:) = normalize(skewness(specmasterP(141:280,:))); i=i+1;
+    features(i,:) = normalize(skewness(specmasterP(281:421,:))); i=i+1;
     [maxYValue1, indexAtMaxY1] = max(specmasterP(1:140,:));
     [maxYValue2, indexAtMaxY2] = max(specmasterP(141:280,:));
     [maxYValue3, indexAtMaxY3] = max(specmasterP(281:421,:));
@@ -30,6 +36,12 @@ function features = compute_features(specmasterP, specnoisedP, copies)
     features(i,:) = normalize(min(specnoisedP(1:140,:))); i=i+1;
     features(i,:) = normalize(min(specnoisedP(141:280,:))); i=i+1;
     features(i,:) = normalize(min(specnoisedP(281:421,:))); i=i+1;
+    features(i,:) = normalize(sum(specnoisedP(1:140,:))); i=i+1;
+    features(i,:) = normalize(sum(specnoisedP(141:280,:))); i=i+1;
+    features(i,:) = normalize(sum(specnoisedP(281:421,:))); i=i+1;
+    features(i,:) = normalize(skewness(specnoisedP(1:140,:))); i=i+1;
+    features(i,:) = normalize(skewness(specnoisedP(141:280,:))); i=i+1;
+    features(i,:) = normalize(skewness(specnoisedP(281:421,:))); i=i+1;
     [maxYValue1, indexAtMaxY1] = max(specnoisedP(1:140,:));
     [maxYValue2, indexAtMaxY2] = max(specnoisedP(141:280,:));
     [maxYValue3, indexAtMaxY3] = max(specnoisedP(281:421,:));
@@ -87,5 +99,6 @@ function features = compute_features(specmasterP, specnoisedP, copies)
     features(i,:) = normalize(pmf2_noised(1,:)); i=i+1; %primo coefficiente della parabola
     features(i,:) = normalize(pmf2_noised(2,:)); i=i+1; %secondo coefficiente della parabola
     %features(i,:) = normalize(pmf2_noised(3,:)); i=i+1; %terzo coefficiente della parabola
+
     features = features';
 end

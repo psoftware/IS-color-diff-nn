@@ -1,0 +1,65 @@
+[System]
+Name='deltae-correction'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=1
+NumRules=1
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='L*'
+Range=[0 100]
+NumMFs=3
+MF1='low-light':'gaussmf',[16.99 -4.441e-16]
+MF2='mid-light':'gaussmf',[16.99 50]
+MF3='high-light':'gaussmf',[16.99 100]
+
+[Input2]
+Name='C*'
+Range=[0 127]
+NumMFs=3
+MF1='low-saturated':'gaussmf',[21.57 0]
+MF2='mid-saturated':'gaussmf',[21.57 63.5]
+MF3='high-saturated':'gaussmf',[21.57 127]
+
+[Input3]
+Name='h*'
+Range=[0 360]
+NumMFs=9
+MF1='red':'trimf',[-14 6 40]
+MF2='orange':'trimf',[40 56 72]
+MF3='yellow':'trimf',[72 87.5 105]
+MF4='yellow-green':'trimf',[105 117.5 130]
+MF5='green':'trimf',[130 148 166]
+MF6='green-blue':'trimf',[166 193 220]
+MF7='blue':'trimf',[220 247.5 275]
+MF8='purple':'trimf',[275 310.5 346]
+MF9='red':'trimf',[346 366 386]
+
+[Input4]
+Name='deltaE'
+Range=[0 10]
+NumMFs=5
+MF1='no-diff':'gaussmf',[0.3822 0.05]
+MF2='exp-diff':'gaussmf',[0.2123 1.5]
+MF3='total-diff':'gaussmf',[2 10]
+MF4='clear-diff':'gaussmf',[0.3185 4.25]
+MF5='unexp-diff':'gaussmf',[0.3185 2.75]
+
+[Output1]
+Name='correctedDeltaE'
+Range=[0 10]
+NumMFs=5
+MF1='no-diff':'gaussmf',[0.3822 0.05]
+MF2='exp-diff':'gaussmf',[0.2123 1.5]
+MF3='total-diff':'gaussmf',[2 10]
+MF4='clear-diff':'gaussmf',[0.3185 4.25]
+MF5='unexp-diff':'gaussmf',[0.3185 2.75]
+
+[Rules]
+1 0 0 0, 1 (1) : 1

@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=4
 NumOutputs=1
-NumRules=8
+NumRules=12
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -32,7 +32,7 @@ Name='h*'
 Range=[0 360]
 NumMFs=8
 MF1='red':'dsigmf',[-1.15 22.6 0.21 339.043947571319]
-MF2='orange':'gauss2mf',[2.41 28.8 7.42 50.2458844024032]
+MF2='orange':'gauss2mf',[2.41 28.5224363916731 7.42 49.9683207940763]
 MF3='yellow':'gauss2mf',[5.62 70.61 5.59 90.5]
 MF4='yellows-green':'gauss2mf',[1.869 104.5 3.368 124]
 MF5='green':'gauss2mf',[4.03 134.28418549346 6.28 158.58418549346]
@@ -62,10 +62,14 @@ MF5='unexp-diff':'gaussmf',[0.3185 2.75]
 
 [Rules]
 1 0 0 0, 1 (1) : 1
-3 3 0 0, 1 (1) : 1
+3 0 0 4, 5 (1) : 1
 3 -1 3 4, 5 (1) : 1
 0 0 0 1, 1 (0.5) : 1
 0 0 0 2, 2 (0.5) : 1
 0 0 0 3, 3 (0.5) : 1
 0 0 0 4, 4 (0.5) : 1
 0 0 0 5, 5 (0.5) : 1
+-1 3 8 2, 5 (1) : 1
+-1 3 8 5, 4 (1) : 1
+-1 1 0 2, 5 (1) : 1
+-1 1 0 5, 4 (1) : 1

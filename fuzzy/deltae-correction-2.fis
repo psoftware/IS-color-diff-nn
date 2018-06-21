@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=4
 NumOutputs=1
-NumRules=13
+NumRules=14
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -74,3 +74,4 @@ MF5='unexp-diff':'gaussmf',[0.3185 2.75]
 -3 3 7 5, 4 (1) : 1
 0 0 0 1, 1 (1) : 1
 0 0 0 3, 3 (1) : 1
+0 0 0 4, 4 (0.5) : 1

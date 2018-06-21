@@ -45,7 +45,7 @@ opt = statset('display', 'iter');
 %bestfeatures = features(:, boolean([0   1   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   0   0   1   0   0   0   0   0   0   1   0   0   1   0   1   0   1   0   0   1   0   0   1   0]));
 
 %10 best - 10 neurons - deAdju
-bestfeatures = features(:,[true true false false false false false false false false false false false false false false false false false false false false false false true false false true false false true true false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false true true true false false])
+bestfeatures = features(:,[true true false false false false false false false false false false false false false false false false false false false false false false true false false true false false true true false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false true true true false false]);
 %bestfeatures = features(:, [false false false false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true false true false false false false false false false true true false false false false false]);
 
 %mse = fs_net_final(bestfeatures, distance');

@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=4
 NumOutputs=1
-NumRules=12
+NumRules=13
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -15,17 +15,17 @@ DefuzzMethod='centroid'
 Name='L*'
 Range=[0 100]
 NumMFs=3
-MF1='low-light':'zmf',[12 25]
-MF2='mid-light':'gaussmf',[16 50]
-MF3='high-light':'smf',[75 90]
+MF1='low-light':'zmf',[12 39.2857142857143]
+MF2='mid-light':'gbellmf',[12.3015873015873 3.28 50]
+MF3='high-light':'smf',[68.1987941240061 90.077101002313]
 
 [Input2]
 Name='C*'
 Range=[0 127]
 NumMFs=3
-MF1='low-saturated':'zmf',[10 32.92]
-MF2='mid-saturated':'gaussmf',[16 60]
-MF3='high-saturated':'smf',[90 115]
+MF1='low-saturated':'zmf',[10 33.09]
+MF2='mid-saturated':'gaussmf',[12.2798900399844 53.6]
+MF3='high-saturated':'smf',[70.0505291005291 106.600529100529]
 
 [Input3]
 Name='h*'
@@ -36,8 +36,8 @@ MF2='orange':'gauss2mf',[2.41 28.5224363916731 7.42 49.9683207940763]
 MF3='yellow':'gauss2mf',[5.62 70.61 5.59 90.5]
 MF4='yellows-green':'gauss2mf',[1.869 104.5 3.368 124]
 MF5='green':'gauss2mf',[4.03 134.28418549346 6.28 158.58418549346]
-MF6='green-blue':'gauss2mf',[8.67 175.975505350773 8.76 194.975505350773]
-MF7='blue':'gauss2mf',[10.7 227.612181958365 12.4 250.612181958365]
+MF6='green-blue':'gauss2mf',[8.67 179.809523809524 8.76 198.809523809524]
+MF7='blue':'gauss2mf',[10.7 231.169715812344 12.4 252]
 MF8='purple':'gbellmf',[23.4433307633 4.13 302]
 
 [Input4]
@@ -52,24 +52,25 @@ MF5='unexp-diff':'gaussmf',[0.3185 2.75]
 
 [Output1]
 Name='correctedDeltaE'
-Range=[0 10]
+Range=[0 10.1]
 NumMFs=5
-MF1='no-diff':'gaussmf',[0.3822 0.05]
+MF1='no-diff':'zmf',[0.19385026737968 1]
 MF2='exp-diff':'gaussmf',[0.2123 1.5]
-MF3='total-diff':'gaussmf',[2 10]
-MF4='clear-diff':'gaussmf',[0.3185 4.25]
+MF3='total-diff':'smf',[5 8]
+MF4='clear-diff':'gaussmf',[0.4 4.25]
 MF5='unexp-diff':'gaussmf',[0.3185 2.75]
 
 [Rules]
-1 0 0 5, 2 (1) : 1
-3 0 0 4, 5 (1) : 1
-3 -1 3 4, 5 (1) : 1
-0 0 0 1, 1 (0.5) : 1
-0 0 0 2, 2 (0.5) : 1
-0 0 0 3, 3 (0.5) : 1
-0 0 0 4, 4 (0.5) : 1
-0 0 0 5, 5 (0.5) : 1
--1 3 8 2, 5 (1) : 1
--1 3 8 5, 4 (1) : 1
--1 1 0 2, 5 (1) : 1
--1 1 0 5, 4 (1) : 1
+2 2 2 2, 1 (1) : 1
+2 2 2 5, 2 (1) : 1
+3 2 3 2, 1 (1) : 1
+3 2 3 5, 2 (1) : 1
+2 1 3 5, 2 (1) : 1
+2 2 5 5, 2 (1) : 1
+2 2 5 2, 1 (1) : 1
+2 2 7 4, 2 (1) : 1
+2 2 6 4, 2 (1) : 1
+2 1 6 5, 2 (1) : 1
+-3 3 7 5, 4 (1) : 1
+0 0 0 1, 1 (1) : 1
+0 0 0 3, 3 (1) : 1

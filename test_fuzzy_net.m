@@ -1,6 +1,6 @@
 clear();
 
-load("dataset\IS_dataset.mat")
+load('dataset\IS_dataset.mat')
 
 copies = 10;
 seed = 27;

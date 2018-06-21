@@ -42,7 +42,7 @@ MF8='purple':'gbellmf',[23.4433307633 4.13 302]
 
 [Input4]
 Name='deltaE'
-Range=[0 10]
+Range=[0 10.1]
 NumMFs=5
 MF1='no-diff':'zmf',[0.19385026737968 1]
 MF2='exp-diff':'gaussmf',[0.2123 1.5]

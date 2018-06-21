@@ -14,9 +14,14 @@ seed = 27;
 % compute DeltaE
 distance = de(labnoise', labmaster')';
 
+fileID = fopen('detaE.txt','w');
 for s=1:1269
     for c=0:copies-1
         c_de = compute_corrected_deltaE(labmaster(:,s+c)',distance(s+c));
-        fprintf(2,'Orig_deltaE=%f corr_deltaE=%f \n',distance(s+c),c_de);
+        filename = strcat(num2str(s),'_');
+        filename = strcat(filename,num2str(c));
+        filename = strcat(filename,'.png');
+        print_diff_lab_to_file(labmaster(:,s)', labnoise(:,s)',filename);
+        fprintf(fileID,'Orig_deltaE=%f corr_deltaE=%f \n',distance(s+c),c_de);
     end
 end

@@ -24,6 +24,9 @@ for s=1:1269*copies
         filename = strcat(filename,'.png');
         %disp(filename);
         %title(num2str(c_de));
-        print_diff_lab_to_file(labmaster(:,s)', labnoise(:,s)',strcat('c_de=',num2str(c_de)),filename);
+        titolo = strcat('de=',num2str(distance(s)));
+        titolo = strcat(titolo,' corrDe=');
+        titolo = strcat(titolo,num2str(c_de));
+        print_diff_lab_to_file(labmaster(:,s)', labnoise(:,s)',titolo,filename);
        % fprintf(fileID,'Orig_deltaE=%f corr_deltaE=%f \n',distance(s+c),c_de);
 end

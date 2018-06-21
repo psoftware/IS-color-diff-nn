@@ -18,10 +18,12 @@ fileID = fopen('detaE.txt','w');
 for s=1:1269
     for c=0:copies-1
         c_de = compute_corrected_deltaE(labmaster(:,s+c)',distance(s+c));
-        filename = strcat(num2str(s),'_');
+        filename = 'png/';
+        filename = strcat(filename,num2str(s));
+        filename = strcat(filename,'_');
         filename = strcat(filename,num2str(c));
         filename = strcat(filename,'.png');
-        print_diff_lab_to_file(labmaster(:,s)', labnoise(:,s)',filename);
+        print_diff_lab_to_file(labmaster(:,s+c)', labnoise(:,s+c)',filename);
         fprintf(fileID,'Orig_deltaE=%f corr_deltaE=%f \n',distance(s+c),c_de);
     end
 end

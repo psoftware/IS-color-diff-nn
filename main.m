@@ -15,6 +15,9 @@ seed = 27;
 distance = de(labnoise', labmaster')';
 distance_adj = compute_corrected_deltaE(labmaster', distance);
 
+%distance_max = 8;
+%indexes = distance_adj < distance_max;
+
 % figure('Position', [100, 100, 1000, 400]);
 % subplot(1,2,1)
 % plot(spec)
@@ -28,14 +31,15 @@ distance_adj = compute_corrected_deltaE(labmaster', distance);
 
 % distance = sqrt( (lab2(1)-lab1(1))^2 + (lab2(2)-lab1(2))^2 + (lab2(3)-lab1(3))^2 )
 
+%%features = compute_features(specmaster(:,indexes), specnoised(:,indexes), sum(indexes>0));
 features = compute_features(specmaster, specnoised, copies);
 
 opt = statset('display', 'iter');
 %[fs, history] = sequentialfs(@fs_net, features, distance', 'cv', 'none', 'opt', opt, 'nfeatures', 5);
-[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 12);
+%[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 12);
 
 % compute best network
-bestfeatures = features(:,fs);
+%bestfeatures = features(:,fs);
 
 % 10 features, 10 neurons (0.84)
 %bestfeatures = features(:, boolean([0   0   0   0   0   0   1   1   0   0   0   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   1   1   0   0  0  0   0   1   0   0   1   0   1   0   1]));
@@ -51,6 +55,16 @@ bestfeatures = features(:,fs);
 % 12 features, 10 neurons (0.86)
 %bestfeatures = features(:, boolean([1   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   0   1   0   0   1]));
 
+% 12 beatures, 20 neurons (0.8), no regr, deltaE max = 8
+%bestfeatures = features(:, [false true false false false false false false false true false true false false false true false false true true false false false true true false false false false false false true false false false false false false false true false false false false false false false false false false true false false false true false false false false false]);
+
+%12 features, 15 neurons (0.77) - 5 fasce
+%bestfeatures = features(:, [true true true false false false false false false false false false false false false false false false false false false false false false true false false true true false true true false false false false false false false false false false false false false true false false false false false false false false true false false false false false false false false true false false true false false false false false]);
 %mse = fs_net_final(bestfeatures, distance');
+
+% fs, [15 15] 1 fascia
+%[false true false false false false false false false true true false false false false false false false false false false false false false false true false false false false false false false false false false false false false false false false false false false false false false true false false false false false true true false false false false false true true true true false true false false false false false]
+
+bestfeatures = features(:, [false false false false false false false false false false true false false false false false false false false false false false false false true true false false false false true false false false false false false false false false true false false false true true false false true false false false false false true true false false false false false false false false true false false true false false false false]);
 mse = fs_net_final(bestfeatures, distance_adj);
 disp(['Mean Squared Error = ', num2str(mse)]);

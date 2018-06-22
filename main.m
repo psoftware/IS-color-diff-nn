@@ -32,10 +32,10 @@ features = compute_features(specmaster, specnoised, copies);
 
 opt = statset('display', 'iter');
 %[fs, history] = sequentialfs(@fs_net, features, distance', 'cv', 'none', 'opt', opt, 'nfeatures', 5);
-%[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 10);
+[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 12);
 
 % compute best network
-%bestfeatures = features(:,fs);
+bestfeatures = features(:,fs);
 
 % 10 features, 10 neurons (0.84)
 %bestfeatures = features(:, boolean([0   0   0   0   0   0   1   1   0   0   0   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   1   1   0   0  0  0   0   1   0   0   1   0   1   0   1]));
@@ -45,8 +45,11 @@ opt = statset('display', 'iter');
 %bestfeatures = features(:, boolean([0   1   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   0   0   1   0   0   0   0   0   0   1   0   0   1   0   1   0   1   0   0   1   0   0   1   0]));
 
 %10 best - 10 neurons - deAdju
-bestfeatures = features(:,[true true false false false false false false false false false false false false false false false false false false false false false false true false false true false false true true false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false true true true false false]);
+%bestfeatures = features(:,[true true false false false false false false false false false false false false false false false false false false false false false false true false false true false false true true false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false true true true false false]);
 %bestfeatures = features(:, [false false false false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true false true false false false false false false false true true false false false false false]);
+
+% 12 features, 10 neurons (0.86)
+%bestfeatures = features(:, boolean([1   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   0   1   0   0   1]));
 
 %mse = fs_net_final(bestfeatures, distance');
 mse = fs_net_final(bestfeatures, distance_adj);

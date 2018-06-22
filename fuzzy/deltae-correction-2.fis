@@ -21,11 +21,11 @@ MF3='high-light':'smf',[68.1987941240061 90.077101002313]
 
 [Input2]
 Name='C*'
-Range=[0 127]
+Range=[0 100]
 NumMFs=3
-MF1='low-saturated':'zmf',[10 33.09]
-MF2='mid-saturated':'gaussmf',[12.2798900399844 53.6]
-MF3='high-saturated':'smf',[70.0505291005291 106.600529100529]
+MF1='low-saturated':'zmf',[10 40]
+MF2='mid-saturated':'gaussmf',[9.67 50]
+MF3='high-saturated':'smf',[60 90]
 
 [Input3]
 Name='h*'

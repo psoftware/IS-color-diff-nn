@@ -5,8 +5,9 @@ function [] = interactive_colordiff(labmaster,labnoise,corrected_de)
     rgbcopies = lab2rgb(labnoise)*255;
     lchmaster = lab2lch(labmaster);
     distance = de(labmaster, labnoise);
+    c_perc = lchmaster(:,2).*100./compute_Cmax(lchmaster(:,1));
     
-    print_with_title = @(i) print_diff_rgb(rgbmaster(i,:), rgbcopies(i,:), {strcat('index=',num2str(i)), strcat(' de=', num2str(distance(i)), ' corrDe=', num2str(corrected_de(i))), strcat(' L=', num2str(lchmaster(i,1)), ' C=', num2str(lchmaster(i,2)),' h=', num2str(lchmaster(i,3)))});
+    print_with_title = @(i) print_diff_rgb(rgbmaster(i,:), rgbcopies(i,:), {strcat('index=',num2str(i)), strcat(' de=', num2str(distance(i)), ' corrDe=', num2str(corrected_de(i))), strcat(' L=', num2str(lchmaster(i,1)), ' C=', num2str(lchmaster(i,2)), ' C%=', num2str(c_perc(i)), ' h=', num2str(lchmaster(i,3)))});
 
     f = figure;
     print_with_title(1);

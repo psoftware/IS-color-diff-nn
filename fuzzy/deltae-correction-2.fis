@@ -15,15 +15,15 @@ DefuzzMethod='centroid'
 Name='L*'
 Range=[0 100]
 NumMFs=3
-MF1='low-light':'zmf',[12 39.2857142857143]
-MF2='mid-light':'gbellmf',[12.3015873015873 3.28 50]
-MF3='high-light':'smf',[68.1987941240061 90.077101002313]
+MF1='low-light':'zmf',[12 32.4074074074074]
+MF2='mid-light':'gbellmf',[14.2 3.28 49.4708994708995]
+MF3='high-light':'smf',[65.7407407407407 90.1]
 
 [Input2]
 Name='C*'
 Range=[0 100]
 NumMFs=3
-MF1='low-saturated':'zmf',[10 40]
+MF1='low-saturated':'zmf',[10 30.026455026455]
 MF2='mid-saturated':'gaussmf',[9.67 50]
 MF3='high-saturated':'smf',[60 90]
 

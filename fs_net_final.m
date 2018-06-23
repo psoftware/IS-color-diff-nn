@@ -1,9 +1,9 @@
-function perf = fs_net_final(x,t)
-	hiddenLayerSize = 15;
+function [best_mse, best_net] = fs_net_final(x,t)
+	hiddenLayerSize = 10;
     repetitions = 10;
 
     best_mse = 999;
-    best_net = [];
+   % best_net = [];
 
     disp(['fs_net_final started (', num2str(repetitions), ' repetitions)']);
 
@@ -28,8 +28,7 @@ function perf = fs_net_final(x,t)
     % plot best network regression
     [m,n] = size(x);
     y = best_net(xx);
-    best_R = regression(tt,y);
-
+    best_R = regression(tt,y); 
     disp(['Best neural network (', num2str(n),' features, ', num2str(hiddenLayerSize), ' neurons): mse=', num2str(best_mse), ' R=', num2str(best_R)]);
     plotregression(tt,y, 'All');
 end

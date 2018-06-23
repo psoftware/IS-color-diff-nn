@@ -18,9 +18,9 @@ function [specmasterP, specnoisedP] = gen_copies(spectra, copies, seed)
                 specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * random('unif',0.95,1.12);  
             else 
                 %in the last sample the noise is bigger
-                specnoisedP(1:146, (i_spec-1)*copies + sampl) = spectra(1:146, i_spec) * random('unif',1,1.15);
-                specnoisedP(147:300, (i_spec-1)*copies + sampl) = spectra(147:300, i_spec) * random('unif',1,1.15);
-                specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * random('unif',1,1.15);  
+                specnoisedP(1:146, (i_spec-1)*copies + sampl) = spectra(1:146, i_spec) * random('unif',1.01,1.125);
+                specnoisedP(147:300, (i_spec-1)*copies + sampl) = spectra(147:300, i_spec) * random('unif',1.01,1.125);
+                specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * random('unif',1.01,1.125);  
             end 
         end
     end

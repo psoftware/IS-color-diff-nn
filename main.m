@@ -48,5 +48,6 @@ bestfeatures = features(:, [false false false false false false false false fals
 
 %12 features 15 neurons fuzzy
 %bestfeatures = features(:, [false false false false false false false false false false false false false false false false true false false false true false false false true true false false false false false false false false false false false false false false false false false false true false true false false true false false false false true true false false true false false false false false false true false false false false false true]);
+
 [mse, net] = fs_net_final(bestfeatures, distance_adj);
-disp(['Mean Squared Error = ', num2str(mse)]);
+

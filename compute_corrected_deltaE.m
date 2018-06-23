@@ -1,5 +1,5 @@
 function [corrected_deltaE] = compute_corrected_deltaE(labmaster, euclid_dist)
-    fis = readfis('fuzzy\deltae-correction-2.fis');
+    fis = readfis('deltae-correction.fis');
 
     lchmaster = lab2lch(labmaster);
     % C must be converted into C% because its range depends on L value

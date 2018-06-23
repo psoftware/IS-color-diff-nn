@@ -1,4 +1,4 @@
-function perf = fs_net_final(x,t)
+function fs_net_final(x,t)
 	hiddenLayerSize = 15;
     repetitions = 10;
 

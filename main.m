@@ -3,7 +3,7 @@ clear();
 load('dataset\IS_dataset.mat')
 
 copies = 10;
-seed = 27;
+seed = 20;
 
 % generate couples (master, noisedmaster)
 [specmaster, specnoised] = gen_copies(spectra, copies, seed);
@@ -30,8 +30,6 @@ distance_adj = compute_corrected_deltaE(labmaster', distance);
 % print_diff_lab(lab1, lab2);
 
 % distance = sqrt( (lab2(1)-lab1(1))^2 + (lab2(2)-lab1(2))^2 + (lab2(3)-lab1(3))^2 )
-
-%%features = compute_features(specmaster(:,indexes), specnoised(:,indexes), sum(indexes>0));
 features = compute_features(specmaster, specnoised, copies);
 
 opt = statset('display', 'iter');
@@ -41,30 +39,14 @@ opt = statset('display', 'iter');
 % compute best network
 %bestfeatures = features(:,fs);
 
-% 10 features, 10 neurons (0.84)
-%bestfeatures = features(:, boolean([0   0   0   0   0   0   1   1   0   0   0   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   1   1   0   0  0  0   0   1   0   0   1   0   1   0   1]));
-% 12 features, 10 neurons (0.93) (others,skewness,sum,NO regression)
-%bestfeatures = features(:, boolean([1   0   0   0   0   0   1   1   1   0   1   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   1   0   0   1   0   0   1   0   1   0   0   1   0   0]));
 % 12 features, 10 neurons (0.963, 0.135) (others,skewness,sum,regression)
 %bestfeatures = features(:, boolean([0   1   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   0   0   1   0   0   0   0   0   0   1   0   0   1   0   1   0   1   0   0   1   0   0   1   0]));
 
-%10 best - 10 neurons - deAdju
-%bestfeatures = features(:,[true true false false false false false false false false false false false false false false false false false false false false false false true false false true false false true true false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false true true true false false]);
-%bestfeatures = features(:, [false false false false false false false false false false false false false false false false false false false false false false false false false true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true false true false false false false false false false true true false false false false false]);
-
-% 12 features, 10 neurons (0.86)
-%bestfeatures = features(:, boolean([1   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   0   0   1   0   0   1]));
-
-% 12 beatures, 20 neurons (0.8), no regr, deltaE max = 8
-%bestfeatures = features(:, [false true false false false false false false false true false true false false false true false false true true false false false true true false false false false false false true false false false false false false false true false false false false false false false false false false true false false false true false false false false false]);
-
-%12 features, 15 neurons (0.77) - 5 fasce
-%bestfeatures = features(:, [true true true false false false false false false false false false false false false false false false false false false false false false true false false true true false true true false false false false false false false false false false false false false true false false false false false false false false true false false false false false false false false true false false true false false false false false]);
-%mse = fs_net_final(bestfeatures, distance');
-
-% fs, [15 15] 1 fascia
-%[false true false false false false false false false true true false false false false false false false false false false false false false false true false false false false false false false false false false false false false false false false false false false false false false true false false false false false true true false false false false false true true true true false true false false false false false]
-
+% 12 features, 10 neaurons (0.96, 0.11388) fuzzy  <----- sembrano andare
+% meglio di tutte finora anche con 15 neauroni
 bestfeatures = features(:, [false false false false false false false false false false true false false false false false false false false false false false false false true true false false false false true false false false false false false false false false true false false false true true false false true false false false false false true true false false false false false false false false true false false true false false false false]);
+
+%12 features 15 neurons fuzzy
+%bestfeatures = features(:, [false false false false false false false false false false false false false false false false true false false false true false false false true true false false false false false false false false false false false false false false false false false false true false true false false true false false false false true true false false true false false false false false false true false false false false false true]);
 mse = fs_net_final(bestfeatures, distance_adj);
 disp(['Mean Squared Error = ', num2str(mse)]);

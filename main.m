@@ -30,7 +30,7 @@ distance_adj = compute_corrected_deltaE(labmaster', distance);
 % print_diff_lab(lab1, lab2);
 
 % distance = sqrt( (lab2(1)-lab1(1))^2 + (lab2(2)-lab1(2))^2 + (lab2(3)-lab1(3))^2 )
-features = compute_features(specmaster, specnoised, copies);
+[features, feature_name] = compute_features(specmaster, specnoised, copies);
 
 opt = statset('display', 'iter');
 %[fs, history] = sequentialfs(@fs_net, features, distance', 'cv', 'none', 'opt', opt, 'nfeatures', 5);
@@ -44,10 +44,15 @@ opt = statset('display', 'iter');
 
 % 12 features, 10 neaurons (0.96, 0.11388) fuzzy  <----- sembrano andare
 % meglio di tutte finora anche con 15 neauroni
-bestfeatures = features(:, [false false false false false false false false false false true false false false false false false false false false false false false false true true false false false false true false false false false false false false false false true false false false true true false false true false false false false false true true false false false false false false false false true false false true false false false false]);
-
+fs = [false false false false false false false false false false true false false false false false false false false false false false false false true true false false false false true false false false false false false false false false true false false false true true false false true false false false false false true true false false false false false false false false true false false true false false false false];
+bestfeatures = features(:, fs);
+bestfeature_name = feature_name(:, fs);
 %12 features 15 neurons fuzzy
 %bestfeatures = features(:, [false false false false false false false false false false false false false false false false true false false false true false false false true true false false false false false false false false false false false false false false false false false false true false true false false true false false false false true true false false true false false false false false false true false false false false false true]);
+
+disp('# Selected features:');
+disp(strjoin(bestfeature_name, '\n'));
+disp('');
 
 [mse, net] = fs_net_final(bestfeatures, distance_adj);
 

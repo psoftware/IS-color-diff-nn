@@ -18,7 +18,7 @@ function [specmasterP, specnoisedP] = gen_copies(spectra, copies, seed)
                 specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * random('unif',0.97,1.12);   
             end 
 
-            r = -0.0005 + 0.001 * rand(421,1);
+            r = -0.005 + 0.01 * rand(421,1);
             specnoisedP(:, (i_spec-1)*copies + sampl) =  specnoisedP(:, (i_spec-1)*copies + sampl) + r;
         end
     end

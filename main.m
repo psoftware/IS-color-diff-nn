@@ -35,15 +35,14 @@ distance_adj = compute_corrected_deltaE(labmaster', distance);
 opt = statset('display', 'iter');
 %[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 12);
 
-% compute best network
-%bestfeatures = features(:,fs);
-
 % 12 features, 10 neurons (0.963, 0.135) (others,skewness,sum,regression)
 % 12 features, 10 neaurons (0.96, 0.11388) fuzzy  <----- sembrano andare
 
-%12 features 15 neurons fuzzy, copie disturbate con rumore a media nulla
-fs = boolean([1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   1   0   1   0   0   0   0]);
+%12 features 15 neurons fuzzy, copie disturbate con rumore a media non nulla
+%fs = boolean([1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   1   0   1   0   0   0   0]);
 
+%12 features 10 neurons fuzzy, copie disturbate con rumore a media nulla
+fs = boolean([0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 0   0   0   1   0   1   0   0   0   0   1   1   1   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   1   0   1]);
 bestfeatures = features(:, fs);
 bestfeature_name = feature_name(:, fs);
 
@@ -51,5 +50,5 @@ disp('# Selected features:');
 disp(strjoin(bestfeature_name, '\n'));
 disp('');
 
-[mse, net] = fs_net_final(bestfeatures, distance_adj);
+[mse, net] = fs_net_final(bestfeatures, distance');
 

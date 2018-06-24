@@ -42,7 +42,13 @@ opt = statset('display', 'iter');
 %fs = boolean([1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   1   0   1   0   0   0   0]);
 
 %12 features 10 neurons fuzzy, copie disturbate con rumore a media nulla
-fs = boolean([0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 0   0   0   1   0   1   0   0   0   0   1   1   1   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   1   0   1]);
+%fs = boolean([0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 0   0   0   1   0   1   0   0   0   0   1   1   1   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   1   0   1]);
+
+%12 features - 5 fasce (0.88 di R)
+%fs = boolean([0   0   0   0   0   1   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0 1   1   0   0   0   1   0   0   0   0   1   1   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 0   0]);
+
+%12 features - new mean added
+fs = boolean([1   0   1   1   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0 1   0   0   0   0   0   0   0   1   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0]);
 bestfeatures = features(:, fs);
 bestfeature_name = feature_name(:, fs);
 

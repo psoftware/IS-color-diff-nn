@@ -15,15 +15,6 @@ seed = 20;
 distance = de(labnoise', labmaster')';
 distance_adj = compute_corrected_deltaE(labmaster', distance);
 
-%distance_max = 8;
-%indexes = distance_adj < distance_max;
-
-% figure('Position', [100, 100, 1000, 400]);
-% subplot(1,2,1)
-% plot(spec)
-% yyaxis right
-% plot(specnoised)
-
 % lab1 = roo2lab(spec'.*speccoeff, 'D65/2', 380:1:800)
 % lab2 = roo2lab(specnoised'.*speccoeff, 'D65/2', 380:1:800)
 % subplot(1,2,2)
@@ -35,8 +26,6 @@ distance_adj = compute_corrected_deltaE(labmaster', distance);
 opt = statset('display', 'iter');
 %[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 12);
 
-% 12 features, 10 neurons (0.963, 0.135) (others,skewness,sum,regression)
-% 12 features, 10 neaurons (0.96, 0.11388) fuzzy  <----- sembrano andare
 
 %12 features 15 neurons fuzzy, copie disturbate con rumore a media non nulla
 %fs = boolean([1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   1   0   1   0   0   0   0]);
@@ -48,7 +37,10 @@ opt = statset('display', 'iter');
 %fs = boolean([0   0   0   0   0   1   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0 1   1   0   0   0   1   0   0   0   0   1   1   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 0   0]);
 
 %12 features - new mean added
-fs = boolean([1   0   1   1   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0 1   0   0   0   0   0   0   0   1   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0]);
+%fs = boolean([1   0   1   1   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0 1   0   0   0   0   0   0   0   1   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0]);
+
+%12 features - new mean/median/skewness/mode added
+fs = boolean([0   1   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   1   0   0   0   1   0   0   0   0   1  0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1 0   0   0   0   0   0   0   0   0   0]);
 bestfeatures = features(:, fs);
 bestfeature_name = feature_name(:, fs);
 
@@ -56,5 +48,5 @@ disp('# Selected features:');
 disp(strjoin(bestfeature_name, '\n'));
 disp('');
 
-[mse, net] = fs_net_final(bestfeatures, distance');
+[mse, net] = fs_net_final(bestfeatures, distance_adj);
 

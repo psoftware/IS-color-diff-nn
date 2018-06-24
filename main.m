@@ -41,6 +41,7 @@ opt = statset('display', 'iter');
 
 %12 features - new mean/median/skewness/mode added
 fs = boolean([0   1   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   1   0   0   0   1   0   0   0   0   1  0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1 0   0   0   0   0   0   0   0   0   0]);
+%fs = boolean([0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   1   1 0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   0   0   1   1   1   0   0   0   0   0   0   1  0   0   0   0   0   0   0   0   1   0]);
 bestfeatures = features(:, fs);
 bestfeature_name = feature_name(:, fs);
 

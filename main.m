@@ -44,11 +44,14 @@ opt = statset('display', 'iter');
 
 % 12 features, 10 neaurons (0.96, 0.11388) fuzzy  <----- sembrano andare
 % meglio di tutte finora anche con 15 neauroni
-fs = [false false false false false false false false false false true false false false false false false false false false false false false false true true false false false false true false false false false false false false false false true false false false true true false false true false false false false false true true false false false false false false false false true false false true false false false false];
+%fs = [false false false false false false false false false false true false false false false false false false false false false false false false true true false false false false true false false false false false false false false false true false false false true true false false true false false false false false true true false false false false false false false false true false false true false false false false];
+% 12 features 15 neurons fuzzy
+%bestfeatures = features(:, [false false false false false false false false false false false false false false false false true false false false true false false false true true false false false false false false false false false false false false false false false false false false true false true false false true false false false false true true false false true false false false false false false true false false false false false true]);
+
+%12 features 15 neurons fuzzy, copie disturbate con rumore a media nulla
+fs = boolean([0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   1   1   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   1   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   0   0   0   0]);
 bestfeatures = features(:, fs);
 bestfeature_name = feature_name(:, fs);
-%12 features 15 neurons fuzzy
-%bestfeatures = features(:, [false false false false false false false false false false false false false false false false true false false false true false false false true true false false false false false false false false false false false false false false false false false false true false true false false true false false false false true true false false true false false false false false false true false false false false false true]);
 
 disp('# Selected features:');
 disp(strjoin(bestfeature_name, '\n'));

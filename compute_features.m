@@ -27,9 +27,9 @@ function [features, feature_name] = compute_features(specmasterP, specnoisedP, c
     features(i,:) = normalize(indexAtMaxY1); feature_name{i} = 'master -> indexAtMaxY(1)'; i=i+1;
     features(i,:) = normalize(indexAtMaxY2); feature_name{i} = 'master -> indexAtMaxY(2)'; i=i+1;
     features(i,:) = normalize(indexAtMaxY3); feature_name{i} = 'master -> indexAtMaxY(3)'; i=i+1;
-    [minYValue1, indexAtMinY1] = min(specmasterP(1:140,:)); i=i+1;
-    [minYValue2, indexAtMinY2] = min(specmasterP(141:280,:)); i=i+1;
-    [minYValue3, indexAtMinY3] = min(specmasterP(281:421,:)); i=i+1;
+    [minYValue1, indexAtMinY1] = min(specmasterP(1:140,:));
+    [minYValue2, indexAtMinY2] = min(specmasterP(141:280,:));
+    [minYValue3, indexAtMinY3] = min(specmasterP(281:421,:));
     features(i,:) = normalize(minYValue1); feature_name{i} = 'master -> minYValue(1)'; i=i+1;
     features(i,:) = normalize(minYValue2); feature_name{i} = 'master -> minYValue(2)'; i=i+1;
     features(i,:) = normalize(minYValue3); feature_name{i} = 'master -> minYValue(3)'; i=i+1;
@@ -61,9 +61,9 @@ function [features, feature_name] = compute_features(specmasterP, specnoisedP, c
     features(i,:) = normalize(indexAtMaxY1); feature_name{i} = 'copy -> indexAtMaxY(1)'; i=i+1;
     features(i,:) = normalize(indexAtMaxY2); feature_name{i} = 'copy -> indexAtMaxY(2)'; i=i+1;
     features(i,:) = normalize(indexAtMaxY3); feature_name{i} = 'copy -> indexAtMaxY(3)'; i=i+1;
-    [minYValue1, indexAtMinY1] = min(specnoisedP(1:140,:)); i=i+1;
-    [minYValue2, indexAtMinY2] = min(specnoisedP(141:280,:)); i=i+1;
-    [minYValue3, indexAtMinY3] = min(specnoisedP(281:421,:)); i=i+1;
+    [minYValue1, indexAtMinY1] = min(specnoisedP(1:140,:));
+    [minYValue2, indexAtMinY2] = min(specnoisedP(141:280,:));
+    [minYValue3, indexAtMinY3] = min(specnoisedP(281:421,:));
     features(i,:) = normalize(minYValue1); feature_name{i} = 'copy -> minYValue(1)'; i=i+1;
     features(i,:) = normalize(minYValue2); feature_name{i} = 'copy -> minYValue(2)'; i=i+1;
     features(i,:) = normalize(minYValue3); feature_name{i} = 'copy -> minYValue(3)'; i=i+1;

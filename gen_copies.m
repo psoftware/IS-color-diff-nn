@@ -11,19 +11,15 @@ function [specmasterP, specnoisedP] = gen_copies(spectra, copies, seed)
                 %DIVIDE BY 1
                 %specnoisedP(1:421, (i_spec-1)*copies + sampl) = spectra(1:421, i_spec) + (rand(1,1)*2 - 1)/75;
                 specnoisedP(:, (i_spec-1)*copies + sampl) = spectra(:,i_spec) * random('unif',0.95,1.12); 
-            elseif ( sampl < copies )
+            else
                 %DIVIDE BY 3
-                specnoisedP(1:146, (i_spec-1)*copies + sampl) = spectra(1:146, i_spec) * random('unif',0.95,1.12);
-                specnoisedP(147:300, (i_spec-1)*copies + sampl) = spectra(147:300, i_spec) * random('unif',0.95,1.12);
-                specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * random('unif',0.95,1.12);  
-            else 
-                %in the last sample the noise is bigger
-                specnoisedP(1:146, (i_spec-1)*copies + sampl) = spectra(1:146, i_spec) * random('unif',1.01,1.125);
-                specnoisedP(147:300, (i_spec-1)*copies + sampl) = spectra(147:300, i_spec) * random('unif',1.01,1.125);
-                specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * random('unif',1.01,1.125);  
+                specnoisedP(1:146, (i_spec-1)*copies + sampl) = spectra(1:146, i_spec) * random('unif',0.97,1.12);
+                specnoisedP(147:300, (i_spec-1)*copies + sampl) = spectra(147:300, i_spec) * random('unif',0.97,1.12);
+                specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * random('unif',0.97,1.12);   
             end 
 
-            specnoisedP(:, (i_spec-1)*copies + sampl) =  specnoisedP(:, (i_spec-1)*copies + sampl) + 0.001 * rand(421, 1);
+            r = -0.0005 + 0.001 * rand(421,1);
+            specnoisedP(:, (i_spec-1)*copies + sampl) =  specnoisedP(:, (i_spec-1)*copies + sampl) + r;
         end
     end
 

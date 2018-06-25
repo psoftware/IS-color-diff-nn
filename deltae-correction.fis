@@ -1,5 +1,5 @@
 [System]
-Name='deltae-correction3'
+Name='deltae-correction'
 Type='mamdani'
 Version=2.0
 NumInputs=4
@@ -15,9 +15,9 @@ DefuzzMethod='centroid'
 Name='L*'
 Range=[0 100]
 NumMFs=3
-MF1='low-light':'zmf',[12.5661375661376 42.5]
-MF2='mid-light':'gbellmf',[14.2 3.28 49.4708994708995]
-MF3='high-light':'smf',[59.9 89.2857142857143]
+MF1='low-light':'zmf',[4.36507936507937 40.1]
+MF2='mid-light':'gbellmf',[16 2.44788058995762 49.5]
+MF3='high-light':'smf',[59.9 92.7248677248677]
 
 [Input2]
 Name='C*'

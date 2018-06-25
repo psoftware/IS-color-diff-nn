@@ -1,7 +1,7 @@
 \chapter{Parte I}
 
 \section{Generazione delle copie}
-In questa prima fase abbiamo generato delle copie degli spettri master in modo tale da poter allenare la rete a riconoscere le differenze tra gli spettri master e copia nella fase succesiva. Affinchè siano rispettati i requisiti, è necessario che le copie generate siano solo lievemente differenti dalle originali di modo che il colore rapresentato dalla copia sia molto simile. Per fare ciò abbiamo provato varie tecniche, tra le quali:
+In questa prima fase abbiamo generato delle copie degli spettri master in modo tale da poter allenare la rete a riconoscere le differenze tra gli spettri master e copia nella fase succesiva. Affinchè siano rispettati i requisiti, è necessario che gli spettri copia siano solo lievemente differenti dagli originali, di modo che il colore rapresentato dalla copia sia molto simile. Per fare ciò abbiamo preso in considerazione varie tecniche, tra le quali:
 \begin{itemize}
 	\item sommare un numero random a tutti i campioni dello spettro
 	\item moltiplicare tutti i campioni per un numero random
@@ -11,7 +11,30 @@ In questa prima fase abbiamo generato delle copie degli spettri master in modo t
 
 Tutti i metodi sono risultati efficaci a patto di regolare oppurtunamente il range di generazione dei coefficienti randomici. L'addizione e la moltiplicazione sono sostanzialmente equivalenti, anche se i coefficienti hanno un diverso peso sul rumore. Per generare le copie abbiamo deciso di utilizzare il rumore moltiplicativo. Abbiamo deciso di utilizzare tutte le alternative allo scopo di avere copie generate in modo variegato.
 
-Per ogni colore del set master generiamo 10 copie, di cui 5 sono disturbate moltiplicando tutti i campioni dello spettro per un numero random piccolo, mentre le restanti 5 sono disturbate su 3 fasce diverse dello spettro. Infine sommiamo un rumore a media nulla molto piccolo a tutti i campioni degli spettri copia.
+Per ogni colore del set master generiamo 10 copie, di cui 5 sono disturbate moltiplicando tutti i campioni dello spettro per un numero random piccolo, mentre le restanti 5 sono disturbate su 3 fasce diverse dello spettro. Infine sommiamo un rumore a media nulla molto piccolo a tutti i campioni degli spettri copia. Il codice seguente lo copie dello spettro disturbato \textit{specnoisedP} a partire da \textit{specmasterP}.
+
+\begin{lstlisting}
+for i_spec = 1:1269
+    for sampl = 1:copies
+        specmasterP(:, (i_spec-1)*copies + sampl) = spectra(:, i_spec);
+
+        if( sampl <= floor(copies/2) )
+        	a = random('unif',0.95,1.12);
+            specnoisedP(:, (i_spec-1)*copies + sampl) = spectra(:,i_spec) * a;
+        else
+            %DIVIDE BY 3
+            a = random('unif',0.97,1.12);
+            b = random('unif',0.97,1.12);
+            c = random('unif',0.97,1.12);
+            specnoisedP(1:146, (i_spec-1)*copies + sampl) = spectra(1:146, i_spec) * a;
+            specnoisedP(147:300, (i_spec-1)*copies + sampl) = spectra(147:300, i_spec) * b;
+            specnoisedP(301:421, (i_spec-1)*copies + sampl) = spectra(301:421, i_spec) * c;
+        end 
+        r = -0.0005 + 0.001 * rand(421,1);
+        specnoisedP(:, (i_spec-1)*copies + sampl) = specnoisedP(:, (i_spec-1)*copies + sampl) + r;
+    end
+end
+\end{lstlisting}
 Forniamo alcuni esempi significativi di coppie di colore generate (originale, copia).
 
 \begin{figure}
@@ -24,7 +47,7 @@ Forniamo alcuni esempi significativi di coppie di colore generate (originale, co
 \caption{Esempi di copie generate (originale, copia)}
 \end{figure}
 
-Dopo una verifica visiva possiamo monitorare di quanto le copie siano state disturbate, in modo aggregato, rispetto al colore master. Per calcolare la differenza tra la copia e master è necessario convertire gli spettri in coordinate L*a*b ed infine calcolare le distanze euclidee. Per convertire gli spettri in coordinate L*a*b abbiamo usato la funzione \(roo2lab()\) del tool optrop per MATLab mentre ed infine abbiamo calcolato le distanze euclidee tramite la funzione \(de()\) . Possiamo rappresentare la distribuzione delle distanze in un istogramma.
+Dopo una verifica visiva possiamo monitorare di quanto le copie siano state disturbate, in modo aggregato, rispetto al colore master. Per calcolare la differenza tra la copia e master è necessario convertire gli spettri in coordinate L*a*b ed infine calcolare le distanze euclidee. Per convertire gli spettri in coordinate L*a*b abbiamo usato la funzione \(roo2lab()\) del tool optrop per MATLab ed infine abbiamo calcolato le distanze euclidee tramite la funzione \(de()\) . Possiamo rappresentare la distribuzione delle distanze in un istogramma.
 
 \begin{figure}
 \begin{center}
@@ -43,9 +66,8 @@ A questo punto dobbiamo scegliere quale feature estrarre. Abbiamo ragionato prin
 Il metodo utilizzato per la \textit{feature extraction} è quello fornito da MATLab attraverso la funzione \textit{sequentialfs()}. Il numero di feature estratte è stato oggetto di analisi al fine di individuare il minor numero di feature, in modo tale da rendere la rete efficiente, e ottenere le migliori prestazioni in termine di errore quadratico medio. Dopo attente analisi abbiamo deciso di selezionare 12 features visto che queste risultano sufficienti per ottenere un errore quadratico medio pari a 0.01.
 
 \section{Risultati}
-Abbiamo riscontrato un problema nel dataset fornito, in particolare per quanto riguarda le coordinate \textit{Lab}: provando a ricalcolarle partendo dagli spettri di (\textit{spectra}) sono state notate delle differenze nei valori, anche se non sostanziali (un errore di circa \(+- 0.1\)). Per questo motivo abbiamo scelto di usare le coordinate calcolate usando la \textit{roo2lab()} invece di quelle già fornite.
 
-La rete che ha i risultati migliori è quella con 12 neuroni nello strato di ingresso e 10 nell'hidden layer (unico strato). Abbiamo eseguito la prova per 10 ripetizioni ed abbiamo ottenuto un \textit{Mean Squared Error} pari a circa 0.017 e un valore \textit{R (Regression)} pari a 0.99338.
+La rete che ha i risultati migliori è quella con 12 neuroni nello strato di ingresso e 8 nell'hidden layer (unico strato). Abbiamo eseguito la prova per 10 ripetizioni ed abbiamo ottenuto un \textit{Mean Squared Error} pari a circa 0.017 e un valore \textit{R (Regression)} pari a \(0.99338 +- 0.01\).
 
 \begin{figure}
 \begin{center}

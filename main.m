@@ -24,7 +24,7 @@ distance_adj = compute_corrected_deltaE(labmaster', distance);
 [features, feature_name] = compute_features(specmaster, specnoised, copies);
 
 opt = statset('display', 'iter');
-%[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 12);
+%[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 8);
 
 
 %12 features 15 neurons fuzzy, copie disturbate con rumore a media non nulla
@@ -40,8 +40,18 @@ opt = statset('display', 'iter');
 %fs = boolean([1   0   1   1   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0 1   0   0   0   0   0   0   0   1   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0]);
 
 %12 features - new mean/median/skewness/mode added
-fs = boolean([0   1   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   1   0   0   0   1   0   0   0   0   1  0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1 0   0   0   0   0   0   0   0   0   0]);
+%fs = boolean([0   1   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   1   0   0   0   1   0   0   0   0   1  0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1 0   0   0   0   0   0   0   0   0   0]);
 %fs = boolean([0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   1   1 0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   0   0   1   1   1   0   0   0   0   0   0   1  0   0   0   0   0   0   0   0   1   0]);
+
+%12 features - 6 fasce
+%fs = boolean([0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
+%10 features - 6 fasce
+%fs = boolean([0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
+%9 features - 6 fasce
+%fs = boolean([0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
+%8 features - 6 fasce
+fs = boolean([0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
+
 bestfeatures = features(:, fs);
 bestfeature_name = feature_name(:, fs);
 
@@ -50,4 +60,3 @@ disp(strjoin(bestfeature_name, '\n'));
 disp('');
 
 [mse, net] = fs_net_final(bestfeatures, distance_adj);
-

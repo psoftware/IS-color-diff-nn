@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=4
 NumOutputs=1
-NumRules=13
+NumRules=17
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -15,9 +15,9 @@ DefuzzMethod='centroid'
 Name='L*'
 Range=[0 100]
 NumMFs=3
-MF1='low-light':'zmf',[12 32.4074074074074]
+MF1='low-light':'zmf',[12.5661375661376 42.5]
 MF2='mid-light':'gbellmf',[14.2 3.28 49.4708994708995]
-MF3='high-light':'smf',[65.7407407407407 90.1]
+MF3='high-light':'smf',[59.9 89.2857142857143]
 
 [Input2]
 Name='C*'
@@ -30,7 +30,7 @@ MF2='saturated':'smf',[39.021164021164 79.4]
 Name='h*'
 Range=[0 360]
 NumMFs=8
-MF1='red':'dsigmf',[-1.15 22.6 0.21 339.043947571319]
+MF1='red':'dsigmf',[-1.15 22.6 0.21 339]
 MF2='orange':'gauss2mf',[2.41 28.5224363916731 7.42 49.9683207940763]
 MF3='yellow':'gauss2mf',[5.62 70.61 5.59 90.5]
 MF4='yellows-green':'gauss2mf',[1.869 104.5 3.368 124]
@@ -43,21 +43,21 @@ MF8='purple':'gbellmf',[23.4433307633 4.13 302]
 Name='deltaE'
 Range=[0 10]
 NumMFs=5
-MF1='no-diff':'zmf',[0.157864302235929 1]
-MF2='exp-diff':'gaussmf',[0.2022 1.429]
-MF3='total-diff':'smf',[5 7]
-MF4='clear-diff':'gaussmf',[0.5343 4.317]
-MF5='unexp-diff':'gaussmf',[0.3033 2.619]
+MF1='no-diff':'zmf',[0.158 1.33597883597884]
+MF2='exp-diff':'gaussmf',[0.327011361941583 1.43]
+MF3='total-diff':'smf',[5 6.91798941798942]
+MF4='clear-diff':'gaussmf',[0.647012448706186 4.32]
+MF5='unexp-diff':'gaussmf',[0.438951076466316 2.62]
 
 [Output1]
 Name='correctedDeltaE'
 Range=[0 10]
 NumMFs=5
-MF1='no-diff':'zmf',[0.101 0.918851195065535]
-MF2='exp-diff':'gaussmf',[0.2381 1.429]
-MF3='total-diff':'smf',[5 7]
-MF4='clear-diff':'gaussmf',[0.5343 4.317]
-MF5='unexp-diff':'gaussmf',[0.3033 2.619]
+MF1='no-diff':'zmf',[0.158 1.33597883597884]
+MF2='exp-diff':'gaussmf',[0.327011361941583 1.43]
+MF3='total-diff':'smf',[5 6.91798941798942]
+MF4='clear-diff':'gaussmf',[0.647012448706186 4.32]
+MF5='unexp-diff':'gaussmf',[0.438951076466316 2.62]
 
 [Rules]
 2 2 2 5, 2 (1) : 1
@@ -73,3 +73,7 @@ MF5='unexp-diff':'gaussmf',[0.3033 2.619]
 0 0 0 4, 4 (0.8) : 1
 0 0 0 5, 5 (0.8) : 1
 0 0 0 2, 2 (0.8) : 1
+1 0 0 4, 2 (1) : 1
+1 0 0 5, 1 (1) : 1
+1 0 0 2, 1 (1) : 1
+1 0 0 3, 2 (1) : 1

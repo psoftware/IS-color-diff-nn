@@ -13,7 +13,7 @@ function [best_mse, best_net] = fs_net_final(x,t)
         net = fitnet(hiddenLayerSize);
         net.trainParam.showWindow = false;
 
-        [net, tr] = train(net, xx, tt);
+        [net, tr] = train(net, xx, tt,'useParallel','yes');
         y = net(xx);
         perf = perform(net, tt, y);
 

@@ -7,10 +7,10 @@
 \caption{Istogramma delle DeltaE corrette dalla rete fuzzy)}
 \end{figure}
 
-% ESPERIMENTO FUZZY
-\paragraph{Feature estratte}\
-\textbf{master} -> mean(2), mode(3), median(4), median(5), skewness(3), maxYValue(2), minYValue(1)
-\\
-\textbf{copy} -> mean(2), var(2), mode(1), skewness(3), maxYValue(2)
-
-Best neural network (12 features, 10 neurons): mse=0.099302 R=0.96949
+Nella seconda parte delle progetto abbiamo sviluppato una rete neurale che non si limita ad approssimare la formula \ref{eqn:formula} ma tiene conto anche delle diffenze percettive dell'occhio umano. L'equazione infatti è imprecisa per certe zone dello spazio L*a*b e pertanto l'output della rete neurale precedente va corretto. Per fare ciò è necessario passare dallo spazio di colore CIE L*a*b allo spazio di colore CIE L*C*h ed infine definire delle regole di inferenza per un sistema fuzzy di tipo Madamani.
+Ricordiamo gli intervalli delle coordinate nello spazio L*C*h.
+\begin{itemize}
+	\item \textit{Lightness (L)} Range [0, 100]
+	\item \textit{Hue (h)} Range  [0, 360\textdegree] 
+    \item \textit{Chroma (C)} Il range dipende dal valore L*. \(C= 127\) quando \(L*=50\) cioè quando si è al centro dell'ellellissoide descritto dall spazio L*C*h.
+\end{itemize}

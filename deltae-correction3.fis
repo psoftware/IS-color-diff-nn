@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=4
 NumOutputs=1
-NumRules=16
+NumRules=17
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -44,20 +44,20 @@ Name='deltaE'
 Range=[0 10]
 NumMFs=5
 MF1='no-diff':'zmf',[0.158 1.33597883597884]
-MF2='exp-diff':'gaussmf',[0.327011361941583 1.43]
+MF2='exp-diff':'gaussmf',[0.282073700550682 1.43]
 MF3='total-diff':'smf',[5 6.91798941798942]
-MF4='clear-diff':'gaussmf',[0.647012448706186 4.32]
-MF5='unexp-diff':'gaussmf',[0.438951076466316 2.62]
+MF4='clear-diff':'gaussmf',[0.534668295228935 4.32]
+MF5='unexp-diff':'gaussmf',[0.371544584379966 2.62]
 
 [Output1]
 Name='correctedDeltaE'
 Range=[0 10]
 NumMFs=5
 MF1='no-diff':'zmf',[0.158 1.33597883597884]
-MF2='exp-diff':'gaussmf',[0.327011361941583 1.43]
+MF2='exp-diff':'gaussmf',[0.282073700550682 1.43]
 MF3='total-diff':'smf',[5 6.91798941798942]
-MF4='clear-diff':'gaussmf',[0.647012448706186 4.32]
-MF5='unexp-diff':'gaussmf',[0.438951076466316 2.62]
+MF4='clear-diff':'gaussmf',[0.534668295228935 4.32]
+MF5='unexp-diff':'gaussmf',[0.371544584379966 2.62]
 
 [Rules]
 2 2 2 5, 2 (1) : 1
@@ -66,13 +66,14 @@ MF5='unexp-diff':'gaussmf',[0.438951076466316 2.62]
 2 2 5 5, 2 (1) : 1
 2 2 5 2, 1 (1) : 1
 2 2 7 4, 2 (1) : 1
-0 0 0 1, 1 (1) : 1
-0 0 0 3, 3 (1) : 1
-0 0 0 4, 4 (0.8) : 1
-0 0 0 5, 5 (0.8) : 1
-0 0 0 2, 2 (0.8) : 1
+0 0 0 1, 1 (0.2) : 1
+0 0 0 3, 3 (0.2) : 1
+0 0 0 4, 4 (0.2) : 1
+0 0 0 5, 5 (0.2) : 1
+0 0 0 2, 2 (0.2) : 1
 1 0 0 4, 2 (1) : 1
 1 0 0 5, 1 (1) : 1
 1 0 0 2, 1 (1) : 1
 1 0 0 3, 2 (1) : 1
--1 1 0 0, 2 (1) : 1
+-1 1 0 -1, 2 (1) : 1
+-1 1 0 1, 1 (1) : 1

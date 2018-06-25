@@ -28,29 +28,36 @@ Ricordiamo gli intervalli delle coordinate nello spazio L*C*h.
 \caption{Grafico del \({C^{'}}_{max}\) al variare di L}
 \end{figure}
 
-\section{Membership function}
-\begin{figure}
+Le funzioni di membership e le regole della rete fuzzy sono state progettate sulla base di alcune situazioni che abbiamo individuato analizzando le coppie disturbate dei colori. Abbiamo notato che, a parità di DeltaE, la differenza delle coppie selezionate può essere percepita diversamente. Per questo motivo abbiamo individuato una serie di zone dello spazio LCh nella quale la percezione è diversa da quella specificata dal DeltaE.
+
+\paragraph{Colori Insaturi} I colori poco saturi si distinguono con più difficoltà.
+\paragraph{Colori Non Luminosi} I colori poco luminosi, similmente a quelli insaturi, non sono facilmente distinguibili.
+\paragraph{Zona colori Arancione} I colori tendenti all'arancione sono più distinguibili.
+\paragraph{Zona colori Giallo/Verde/Blu} I colori tendenti al giallo, al verde o al blu non sono facilmente distinguibili.
+
+\section{Funzioni di Membership}
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[scale=0.8]{images/rete2-membership-light.PNG}
 \end{center}
 \caption{Funzione di membership Light}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[scale=0.8]{images/rete2-membership-saturation.PNG}
 \end{center}
 \caption{Funzione di membership Saturation}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[scale=0.8]{images/rete2-membership-colors.PNG}
 \end{center}
 \caption{Funzione di membership Hue (Colore)}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
 \begin{center}
 	\includegraphics[scale=0.8]{images/rete2-membership-deltae.PNG}
 \end{center}
@@ -58,9 +65,30 @@ Ricordiamo gli intervalli delle coordinate nello spazio L*C*h.
 \end{figure}
 
 \section{Regole}
-\begin{figure}
-\begin{center}
-	\includegraphics[scale=1]{images/rete2-fuzzy-rules.PNG}
-\end{center}
-\caption{Funzione di membership DeltaE (distanza euclidea)}
-\end{figure}
+
+\begin{table*}[!ht]
+\centering
+\begin{tabular}{|c c c c c c |}
+\hline
+L & c  & h & $\Delta E_{orig}$ & $\Delta E_{adj}$ & peso\\ \hline
+-  & -           & -          & total-diff        & total-diff   & 0.2 \\ \hline
+-  & -           & -          & clear-diff        & clear-diff   & 0.2 \\ \hline
+-  & -           & -          & unexp-diff        & unexp-diff   & 0.2 \\ \hline
+-  & -           & -          & exp-diff          & exp-diff   & 0.2 \\ \hline
+-  & -           & -          & no-diff          & no-diff   & 0.2 \\ \hline
+low-light  & -           & -          & total-diff        & exp-diff   & 1 \\ \hline
+low-light  & -           & -          & clear-diff        & exp-diff   & 1 \\ \hline
+low-light  & -           & -          & unexp-diff        & no-diff   & 1 \\ \hline
+low-light  & -           & -          & exp-diff          & no-diff   & 1 \\ \hline
+mid-light  & saturated   & orange     & unexp-diff        & exp-diff   & 1 \\ \hline
+mid-light  & saturated   & green      & unexp-diff        & exp-diff   & 1 \\ \hline
+mid-light  & saturated   & green      & exp-diff          & no-diff   & 1 \\ \hline
+mid-light  & saturated   & blue       & clear-diff        & exp-diff   & 1 \\ \hline
+high-light & saturated   & yellow     & unexp-diff        & no-diff   & 1 \\ \hline
+high-light & saturated   & yellow     & clear-diff        & exp-diff   & 1 \\ \hline
+not(low-light) & unsaturated & -      & not(no-diff)      & exp-diff   & 1 \\ \hline
+not(low-light) & unsaturated & -      & no-diff           & no-diff   & 1 \\ \hline
+\end{tabular}
+\caption{Regole di inferenza del sistema Madamani}
+\label{tab:rules}
+\end{table*}

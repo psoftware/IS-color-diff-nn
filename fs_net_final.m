@@ -1,5 +1,5 @@
 function [best_mse, best_net] = fs_net_final(x,t)
-	hiddenLayerSize = 8;
+	hiddenLayerSize = 10;
     repetitions = 10;
 
     best_mse = 999;

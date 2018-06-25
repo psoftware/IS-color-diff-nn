@@ -1,5 +1,5 @@
 function perf = fs_net(x,t)
-	hiddenLayerSize = 8;
+	hiddenLayerSize = 10;
     net = fitnet(hiddenLayerSize);
     net.trainParam.showWindow = false;
     xx = x.';

@@ -1,0 +1,75 @@
+[System]
+Name='deltae-correction3'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=1
+NumRules=13
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='L*'
+Range=[0 100]
+NumMFs=3
+MF1='low-light':'zmf',[12 32.4074074074074]
+MF2='mid-light':'gbellmf',[14.2 3.28 49.4708994708995]
+MF3='high-light':'smf',[65.7407407407407 90.1]
+
+[Input2]
+Name='C*'
+Range=[0 100]
+NumMFs=2
+MF1='unsaturated':'zmf',[10 49.07]
+MF2='saturated':'smf',[39.021164021164 79.4]
+
+[Input3]
+Name='h*'
+Range=[0 360]
+NumMFs=8
+MF1='red':'dsigmf',[-1.15 22.6 0.21 339.043947571319]
+MF2='orange':'gauss2mf',[2.41 28.5224363916731 7.42 49.9683207940763]
+MF3='yellow':'gauss2mf',[5.62 70.61 5.59 90.5]
+MF4='yellows-green':'gauss2mf',[1.869 104.5 3.368 124]
+MF5='green':'gauss2mf',[4.03 134.28418549346 6.28 158.58418549346]
+MF6='green-blue':'gauss2mf',[8.67 179.809523809524 8.76 198.809523809524]
+MF7='blue':'gauss2mf',[10.7 231.169715812344 12.4 252]
+MF8='purple':'gbellmf',[23.4433307633 4.13 302]
+
+[Input4]
+Name='deltaE'
+Range=[0 10]
+NumMFs=5
+MF1='no-diff':'zmf',[0.157864302235929 1]
+MF2='exp-diff':'gaussmf',[0.2022 1.429]
+MF3='total-diff':'smf',[5 7]
+MF4='clear-diff':'gaussmf',[0.5343 4.317]
+MF5='unexp-diff':'gaussmf',[0.3033 2.619]
+
+[Output1]
+Name='correctedDeltaE'
+Range=[0 10]
+NumMFs=5
+MF1='no-diff':'zmf',[0.101 0.918851195065535]
+MF2='exp-diff':'gaussmf',[0.2381 1.429]
+MF3='total-diff':'smf',[5 7]
+MF4='clear-diff':'gaussmf',[0.5343 4.317]
+MF5='unexp-diff':'gaussmf',[0.3033 2.619]
+
+[Rules]
+2 2 2 5, 2 (1) : 1
+3 2 3 5, 1 (1) : 1
+3 2 3 4, 2 (1) : 1
+2 2 5 5, 2 (1) : 1
+2 2 5 2, 1 (1) : 1
+2 2 7 4, 2 (1) : 1
+2 1 6 4, 2 (1) : 1
+-3 1 7 5, 4 (1) : 1
+0 0 0 1, 1 (1) : 1
+0 0 0 3, 3 (1) : 1
+0 0 0 4, 4 (0.8) : 1
+0 0 0 5, 5 (0.8) : 1
+0 0 0 2, 2 (0.8) : 1

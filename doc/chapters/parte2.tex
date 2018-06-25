@@ -12,5 +12,8 @@ Ricordiamo gli intervalli delle coordinate nello spazio L*C*h.
 \begin{itemize}
 	\item \textit{Lightness (L)} Range [0, 100]
 	\item \textit{Hue (h)} Range  [0, 360\textdegree] 
-    \item \textit{Chroma (C)} Il range dipende dal valore L*. \(C= 127\) quando \(L*=50\) cioè quando si è al centro dell'ellellissoide descritto dall spazio L*C*h.
+    \item \textit{Chroma (C)} Il range dipende dal valore L\textsuperscript{*}. \(C\textsubscript{max}= 127\) quando \(L\textsuperscript{*}=50\) cioè quando si è al centro dell'ellellissoide descritto dall spazio L*C*h mentre è \(C\textsuperscript{*}=0\) quando \(L\textsuperscript{*}=0\) oppure \(L\textsuperscript{*}=100\). La relazione tra L\textsuperscript{*} e C\textsubscript{*} quindi si può descrivere come un ellisse.
+    	\begin{equation}\label{eqn:ellipse}
+       		\frac{C\textsuperscript{*}^2}{127^2} + \frac{(L\textsuperscript{*}-50)^2}{50^2} = 1
+       	\end{equation}
 \end{itemize}

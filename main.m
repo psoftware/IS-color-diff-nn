@@ -1,7 +1,10 @@
+% clear to avoid past workspace issues
 clear();
 
+% load spectra, coordinates from the given dataset
 load('dataset\IS_dataset.mat')
 
+% project parameters
 copies = 10;
 seed = 20;
 
@@ -15,53 +18,37 @@ seed = 20;
 distance = de(labnoise', labmaster')';
 distance_adj = compute_corrected_deltaE(labmaster', distance);
 
-% lab1 = roo2lab(spec'.*speccoeff, 'D65/2', 380:1:800)
-% lab2 = roo2lab(specnoised'.*speccoeff, 'D65/2', 380:1:800)
-% subplot(1,2,2)
-% print_diff_lab(lab1, lab2);
-
 % distance = sqrt( (lab2(1)-lab1(1))^2 + (lab2(2)-lab1(2))^2 + (lab2(3)-lab1(3))^2 )
 [features, feature_name] = compute_features(specmaster, specnoised, copies);
 
+% select best features using fs_net
 opt = statset('display', 'iter');
-%fs0 = boolean([0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   0   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0  0   0   1   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0]);
-
 %[fs, history] = sequentialfs(@fs_net, features, distance_adj, 'cv', 'none', 'opt', opt, 'nfeatures', 12);
 
-
-%12 features 15 neurons fuzzy, copie disturbate con rumore a media non nulla
-%fs = boolean([1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   1   0   1   0   0   0   0]);
-
-%12 features 10 neurons fuzzy, copie disturbate con rumore a media nulla
-%fs = boolean([0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 0   0   0   1   0   1   0   0   0   0   1   1   1   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   1   0   1]);
-
-%12 features - 5 fasce (0.88 di R)
+% some experiments
+%12 features - 5 range extraction (0.88 di R)
 %fs = boolean([0   0   0   0   0   1   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0 1   1   0   0   0   1   0   0   0   0   1   1   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 0   0]);
-
-%12 features - new mean added
-%fs = boolean([1   0   1   1   0   0   0   0   0   0   0   1   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0 1   0   0   0   0   0   0   0   1   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   0   0]);
-
-%12 features - new mean/median/skewness/mode added
-%fs = boolean([0   1   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   1   0   0   0   1   0   0   0   0   1  0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1 0   0   0   0   0   0   0   0   0   0]);
-%fs = boolean([0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   1   0   0   0   1   1 0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   0   0   1   1   1   0   0   0   0   0   0   1  0   0   0   0   0   0   0   0   1   0]);
-
-%12 features - 6 fasce
+%12 features, 10 neurons - 6 range extraction
 %fs = boolean([0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
-%10 features - 6 fasce
+%10 features, 10 neurons - 6 range extraction
 %fs = boolean([0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
-%9 features - 6 fasce
+%9 features, 10 neurons - 6 range extraction
 %fs = boolean([0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
-%8 features - 6 fasce
+%8 features, 10 neurons - 6 range extraction
 %fs = boolean([0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0]);
 
-%12 features - 6 fasce
+% final selected features
+%12 features, 10 neurons - 6 range extraction
 fs = boolean([0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   0   0   0   1   0   0   1 0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0 0   0   1   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   0   0]);
 
+% get features selected by sequentialfs
 bestfeatures = features(:, fs);
 bestfeature_name = feature_name(:, fs);
 
+% print selected feature names
 disp('# Selected features:');
 disp(strjoin(bestfeature_name, '\n'));
 disp('');
 
+% train a new network using selected features
 [mse, net] = fs_net_final(bestfeatures, distance_adj);

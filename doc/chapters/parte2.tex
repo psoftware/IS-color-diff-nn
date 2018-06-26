@@ -125,6 +125,27 @@ not(low-light) & unsaturated & -      & no-diff           & no-diff   & 1 \\ \hl
 \label{tab:rules}
 \end{table*}
 
+\section{Confronti Colore}
+Nelle figure seguenti sono mostrati esempi di correzione effettuati dal sistema fuzzy. In ogni immagine sono mostrate:
+\begin{itemize}
+ \item la rappresentazione in coordinate L*C*h del colore master 
+ \item la differenza \textit{de} calcolata sulla base della formula \ref{eqn:formula}
+ \item la differenza \textit{corrDe} calcolata dal sistema fuzzy applicando le regole di inferenza
+\end{itemize}
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[scale=0.5]{images/1196.png}
+	\includegraphics[scale=0.5]{images/3277.png}
+	\includegraphics[scale=0.5]{images/6579.png}
+	\includegraphics[scale=0.5]{images/6677.png}
+	\includegraphics[scale=0.5]{images/7956.png}
+	\includegraphics[scale=0.5]{images/9296.png}
+\end{center}
+\caption{Confronto master copia con distanze corrette dal sistema fuzzy}
+\label{fig:decorrde}
+\end{figure}
+
 \section{Risultati}
 Quello che ci aspettavamo, con l'implementazione della rete, era una differente distribuzione dei DeltaE corretti rispetto a quelli iniziali: questo risultato è confermabile guardando gli istogrammmi in figura \ref{fig:fuzzyhistogramcomparision}. Le operazioni di fuzzyfication e defuzzyfication hanno concentrato, maggiormente, i DeltaE nelle zone specificate dalla funzione di membership e dalle regole di inferenza inserite.
 \begin{figure}[!ht]

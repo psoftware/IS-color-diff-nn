@@ -165,7 +165,7 @@ L'utilizzo dei DeltaE corretti per il training di una nuova rete neurale ha scat
 \textbf{copy}: median(1), median(3), skewness(1), skewness(5), maxYValue(2), indexAtMaxY(2)
 
 Estraendo 12 feature e utilizzando 10 neuroni nell'hidden layer (1 layer), abbiamo riscontrato:
-\[Mean\ Squared\ Error \simeq 0.0395, R \simeq 0.954\]
+\[Mean\ Squared\ Error \simeq 0.036, R \simeq 0.957\]
 
 Le performance della rete sono peggiorate, a parità di numero di feature e neuroni dello strato nascosto. Questo è imputabile al fatto che la rete fuzzy rende più complesso il legame tra i colori in ingresso e le distanze calcolate: nel primo caso la distanza era euclidea, nel secondo caso è modificata secondo le regole della rete fuzzy (quindi è una funzione più complessa per il fitting).
 

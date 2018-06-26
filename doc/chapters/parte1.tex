@@ -106,22 +106,35 @@ end
 \end{lstlisting}
 
 \section{Risultati}
-La rete che ha i risultati migliori è quella con 12 neuroni nello strato di ingresso e 10 nell'hidden layer (unico strato). Abbiamo eseguito la prova per 10 ripetizioni ed abbiamo ottenuto un \textit{Mean Squared Error} pari a circa 0.017 e un valore \textit{R (Regression)} pari a \(0.99338 \pm 0.0004\).
-
-\begin{figure}[!ht]
-\begin{center}
-	\includegraphics[scale=0.7]{images/rete1-regression.jpg}
-\end{center}
-\caption{Retta di Regressione della rete neurale}
-\end{figure}
-
 \paragraph{Feature estratte}
 Le feature estratte dalla \textit{sequentialfs} sono state le seguenti:
 \\\\
-\textbf{master}: mean(2), mode(3), median(4), median(5), skewness(3), maxYValue(2), minYValue(1)
+\textbf{master}: \textit{mean(3), maxYValue(1), minYValue(1), minYValue(2)}
 \\
-\textbf{copie}: mean(2), var(2), mode(1), skewness(3), maxYValue(2)
-\\\\(1,2,3) indicano i 3 range dello spettro equidimensionati sulla quale le funzioni sono applicate
-\\(4,5) sono 2 range aggiuntivi, che si sovrappongono ai precedenti (dividono lo spettro in 2)
-
+\textbf{copie}: \textit{mean(3), mode(1), mode(6), minYValue(1)}
+\\\\(1,2,3,4,5,6) indicano i 6 range dello spettro equidimensionati sulla quale le funzioni sono applicate
+\\\\
 Tuttavia differenti esecuzioni hanno portato, spesso, all'estrazione di feature differenti: questo può essere dovuto alla correlazione tra le varie funzioni scelte (es. la skewness è calcolata dal mean e dalla varianza).
+
+La rete che ha i risultati migliori è quella con 8 neuroni nello strato di ingresso e 10 nell'hidden layer (unico strato). Abbiamo eseguito la prova per 10 ripetizioni ed abbiamo ottenuto i seguenti risultati:
+\\\\
+Repetition 1 mse=0.028227 R=0.98895\\
+Repetition 2 mse=0.032396 R=0.9873\\
+Repetition 3 mse=0.022967 R=0.99101\\
+Repetition 4 mse=0.025286 R=0.99011\\
+Repetition 5 mse=0.022659 R=0.99114\\
+Repetition 6 mse=0.025448 R=0.99004\\
+Repetition 7 mse=0.022911 R=0.99104\\
+Repetition 8 mse=0.020347 R=0.99205\\
+Repetition 9 mse=0.024775 R=0.9903\\
+Repetition 10 mse=0.025416 R=0.99005\\
+
+Il risultato migliore è:
+\[Mean\ Squared\ Error \simeq 0.02, R(Regression) = 0.992\]
+
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[scale=0.9]{images/rete1-regression.jpg}
+\end{center}
+\caption{Retta di Regressione della rete neurale}
+\end{figure}
